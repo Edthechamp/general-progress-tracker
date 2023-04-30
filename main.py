@@ -10,7 +10,6 @@ welcome = tk.Label(root,text="Welcome to the app \n select a trackable or create
 welcome.place(x=300,y=40,anchor="center")
 
 
-
 def frame_make():
     #resize window to fit
     global trackable_count
