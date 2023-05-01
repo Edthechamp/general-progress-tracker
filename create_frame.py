@@ -1,17 +1,25 @@
 import tkinter as tk
 
+trackable_label = ""
 
-trackable_count=0
+def when_run():
+    root2 = tk.Toplevel()
+    root2.title("Create New Trackable")
+    root2.geometry("320x150")
 
-def frame_make():
-    #resize window to fit
-    global trackable_count
-    trackable_count +=1
-    root.geometry(f"600x{200+150*trackable_count}")
+    trackable_name = tk.Entry(root2)
+    def Submit(event):
+        global trackable_label
+        trackable_label = trackable_name.get()
+        trackable_name.delete(0, tk.END)
+        root2.quit()
+        root2.destroy()
 
-    #replace btn create_new
-    create_new.place_configure(x=450,anchor="center",y=180+150*trackable_count)
 
-    #create frame
-    frame = tk.Frame(root,width=400,height=150, bg="blue")
-    frame.place(x=300,anchor="center",y=180)
+    trackable_entry_instruc = tk.Label(root2,text="Enter the name of the trackable!",font=("Arial",14))
+    trackable_entry_instruc.place(x=160,y=20,anchor="center")
+
+    trackable_name.place(x=160,y=43,anchor="center")
+    root2.bind('<Return>', Submit)
+    root2.mainloop()
+

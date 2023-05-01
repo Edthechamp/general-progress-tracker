@@ -1,5 +1,7 @@
 import tkinter as tk
 
+import create_frame
+
 root = tk.Tk()
 trackable_count = 0
 root.title("General Progress Tracker")
@@ -14,25 +16,27 @@ canvas.create_window(300,40,window=welcome)
 
 canvas.bind('<MouseWheel>',lambda event:canvas.yview_scroll(-int(event.delta/60),"units"))
 
-
 def frame_make():
+    global btn_id
     global trackable_count
 
+    create_frame.when_run()
+    frame_label = create_frame.trackable_label
+
     # create frame
-    frame = tk.Frame(canvas, width=400, height=150, bg="blue")
-    canvas.create_window(300,180+trackable_count*180,window=frame)
+    frame = tk.LabelFrame(canvas,text=f"{frame_label}",labelanchor="n",font=("Arial",13), width=400, height=150, bg="#ADD8E6")
+    canvas.create_window(300,180+trackable_count*160,window=frame)
 
-    trackable_count +=1
-    if trackable_count <=4:
+    trackable_count += 1
+    if trackable_count <=3:
         # resize window to fit
-        root.geometry(f"600x{200+170*trackable_count}")
+        root.geometry(f"600x{180+160*trackable_count}")
 
-    btn_height= 180+170*trackable_count
-    print(btn_height)
-    canvas.moveto("create_new",450,btn_height)
+    btn_height= 140+160*trackable_count
+    canvas.moveto(btn_id,450,btn_height)
 
 
-create_new = tk.Button(canvas,text="create new trackable",command=frame_make)
-canvas.create_window(450,180,window=create_new)
+create_new = tk.Button(canvas,text="create new trackable",command=frame_make,)
+btn_id=canvas.create_window(500,180,window=create_new)
 # Run the window
 root.mainloop()
