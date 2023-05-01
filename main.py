@@ -24,7 +24,12 @@ def frame_make():
     frame_label = create_frame.trackable_label
 
     # create frame
-    frame = tk.LabelFrame(canvas,text=f"{frame_label}",labelanchor="n",font=("Arial",13), width=400, height=150, bg="#ADD8E6")
+    frame_bg = "#ADD8E6"
+    frame = tk.LabelFrame(canvas,text=f"{frame_label}",labelanchor="n",font=("Arial",13), width=400, height=150, bg=frame_bg)
+    entrybox_instruc = tk.Label(frame,font=("Arial",9),text="Enter the data for this trackable!",bg=frame_bg)
+    entrybox_instruc.place(x=250,y=25,anchor="center")
+    entrybox = tk.Entry(frame)
+    entrybox.place(x=250,y=50,anchor="center")
     canvas.create_window(300,180+trackable_count*160,window=frame)
 
     trackable_count += 1
