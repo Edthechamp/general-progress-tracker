@@ -4,7 +4,10 @@ from tkinter.colorchooser import askcolor
 trackable_label = ""
 chosen_color = ""
 label_got = False
+hex_color = "#ADD8E6"
 def when_run():
+    global hex_color
+    hex_color = "#ADD8E6"
     label_got = False
     root2 = tk.Toplevel()
     root2.title("Create New Trackable")
@@ -14,8 +17,8 @@ def when_run():
     def Submit():
         global label_got
         global trackable_label
-        if trackable_label == False:
-            label_got = True
+        if label_got == False:
+            print("got label from submit")
             trackable_label = trackable_name.get()
         label_got = False
         root2.quit()
@@ -24,8 +27,10 @@ def when_run():
     def label_chosen(event):
         global trackable_label
         global label_got
+        label_got= False
 
         if label_got == False:
+            print("got label from enter press")
             trackable_label = trackable_name.get()
             label_got=True
 
@@ -37,7 +42,8 @@ def when_run():
     trackable_entry_instruc.place(x=160,y=20,anchor="center")
 
     def color_chooser():
-        color_choose = askcolor(title="Choose the color for this trackable!")
+        global hex_color
+        rgb_color, hex_color = askcolor(title="Choose the color for this trackable!")
 
     activate = tk.Button(root2,text="choose a color for\nthis trackable!",command=color_chooser)
     activate.place(x=80,y=110,anchor="center")

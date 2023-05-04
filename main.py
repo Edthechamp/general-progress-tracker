@@ -24,7 +24,7 @@ def frame_make():
     frame_label = create_frame.trackable_label
 
     # create frame
-    frame_bg = "#ADD8E6"
+    frame_bg = create_frame.hex_color
     frame = tk.LabelFrame(canvas,text=f"{frame_label}",labelanchor="n",font=("Arial",13), width=400, height=150, bg=frame_bg)
     entrybox_instruc = tk.Label(frame,font=("Arial",9),text="Enter the data for this trackable!",bg=frame_bg)
     entrybox_instruc.place(x=250,y=25,anchor="center")
