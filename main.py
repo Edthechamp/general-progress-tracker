@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 
 import create_frame
 
@@ -33,6 +34,26 @@ def frame_make():
     canvas.create_window(300,180+trackable_count*160,window=frame)
 
     trackable_count += 1
+
+    # connect to the databse. will create new if it doesnt exist
+    conn = sqlite3.connect("tracker-data.db")
+
+    # create cursor and table with 3 values spaces.
+    cur = conn.cursor()
+    conn.execute('''CREATE TABLE IF NOT EXISTS frames
+                (frame_name TEXT,frame_color TEXT,trackable_order INTEGER)''')
+
+
+    #insert the name, color and order count of specific frame
+    cur.execute('''INSERT INTO frames (frame_name, frame_color,trackable_order) VALUES(?,?,?)''',(frame_label,frame_bg,trackable_count))
+
+    data_test = cur.execute("SELECT * FROM frames ")
+    for row in data_test:
+        print(row)
+
+    cur.close()  #
+    conn.close()  # will place this two somewhere else later here just for now
+
     if trackable_count <=3:
         # resize window to fit
         root.geometry(f"600x{180+160*trackable_count}")
